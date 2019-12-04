@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'user',
     'home',
+    'course',
     'corsheaders',
     # xamin主体模块
     'xadmin',
@@ -208,3 +209,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 配置所有常量子配置
 from .const import *
+# 缓存配置redis数据库
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/15",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100}
+        }
+    }
+}
