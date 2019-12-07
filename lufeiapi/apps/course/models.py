@@ -98,7 +98,9 @@ class Course(BaseModel):
     @property
     def section_list(self):
         temp_section_list = []
+        #self是课程对象，.all查出所有的章
         for chapter in self.coursechapters.all():
+            #在通过chapter获取节
             for section in chapter.coursesections.all():
                 if len(temp_section_list) >= 4:
                     return temp_section_list

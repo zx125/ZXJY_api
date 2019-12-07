@@ -1,5 +1,8 @@
+
 from rest_framework.serializers import ModelSerializer
+
 from . import models
+
 
 class TeacherModelSerializer(ModelSerializer):
     class Meta:
@@ -29,4 +32,30 @@ class FreeCourseModelSerializer(ModelSerializer):
             'price',
             'teacher',
             'section_list',
+            # 'course_category'
         )
+
+class CategoryModelSerializer(ModelSerializer):
+    class Meta:
+        model = models.CourseCategory
+        fields = ('id', 'name')
+
+class CourseSectionModelSerializer(ModelSerializer):
+    class Meta:
+        model = models.CourseSection
+        fields = '__all__'
+
+class CourseChapterModelSerializer(ModelSerializer):
+    coursesections = CourseSectionModelSerializer(many=True)
+    class Meta:
+        model = models.CourseChapter
+        fields = (
+            'id',
+            'name',
+            'chapter',
+            'summary',
+            'coursesections',
+        )
+
+
+
